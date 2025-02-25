@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/auth-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
+import { goldColor } from "../../common/constants";
+import InputField from "./input";
 
 const Login = () => {
   const [identifier, setIdentifier] = useState<string>("");
@@ -11,17 +13,7 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const { isAuthenticated, isLoading, error, user } = useSelector(
-    (state: RootState) => state.auth
-  );
-
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      navigate("/dashboard");
-    } else {
-      navigate("/");
-    }
-  }, [isAuthenticated, user, navigate]);
+  const { isLoading, error } = useSelector((state: RootState) => state.auth);
 
   const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,49 +26,39 @@ const Login = () => {
       if (result.payload) {
         setIdentifier("");
         setPassword("");
+
+        navigate("/home");
       }
     });
   };
 
-  // "#df9c18",
-
   return (
-    <div className={"bg-primaryGold"}>
-      <div>Login page</div>
+    <div className={"flex flex-col gap-5 rounded-lg bg-white p-7"}>
+      <div>
+        <p className={"font-bold text-xl"}>Login</p>
+        <p className={"text-sm text-slate-600"}>
+          Enter your email & password to login
+        </p>
+      </div>
 
-      <form onSubmit={handleSignIn}>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            value={identifier}
-            onChange={(e) => setIdentifier(e.target.value)}
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
-          <input
-            type={showPassword ? "text" : "password"}
-            className="form-control"
-            id="exampleInputPassword1"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="mb-3 form-check">
+      <form onSubmit={handleSignIn} className={"flex flex-col gap-2"}>
+        <InputField
+          label="Email Address"
+          type="email"
+          value={identifier}
+          onChange={(e) => setIdentifier(e.target.value)}
+        />
+        <InputField
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <div className="flex flex-row gap-3 items-center  mb-3 form-check">
           <input
             type="checkbox"
-            className="form-check-input"
+            className={"form-check-input"}
             id="exampleCheck1"
             checked={showPassword}
             onChange={() => setShowPassword(!showPassword)}
@@ -85,10 +67,16 @@ const Login = () => {
             Show Password
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
-          {isLoading ? "Loading..." : "Submit"}
+
+        <button
+          type="submit"
+          className={`my-1 cursor-pointer p-2 text-white font-semibold rounded-lg bg-[${goldColor}] hover:bg-[${goldColor}]/20`}
+        >
+          {isLoading ? "Loading..." : "Sign In"}
         </button>
-        {error && <p className={""}>{error}</p>}
+        {error && (
+          <p className={"text-xs text-red-500"}>{error}. Please try again</p>
+        )}
       </form>
     </div>
   );

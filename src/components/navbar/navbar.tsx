@@ -2,7 +2,14 @@ import UserProfile from "./user-profile";
 import { MenuRounded } from "@mui/icons-material";
 import { goldColor } from "../../common/constants";
 
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+
 const NavBar = () => {
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  console.log(user);
+
   return (
     <div>
       <div

@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { signInUserAPI } from "../common/helpers";
-import { IUserCredentials } from "../common/types";
+import { IUserCredentials, IUser } from "../common/types";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userCredentials: IUserCredentials, { rejectWithValue }) => {
     try {
       const response = await signInUserAPI(userCredentials);
-
-      console.log("From API ", response);
       return response.data.data;
+
+      // Save to localStorage
+      // localStorage.setItem("user", JSON.stringify(userData));
+
+      // return userData;
     } catch (error) {
       const errorMessage = (error as any).response?.data || "Login failed";
       return rejectWithValue(errorMessage);
@@ -17,11 +20,19 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-const initialState = {
+interface IInitialState {
+  isLoading: boolean;
+  user: IUser | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  error: string | null;
+}
+
+const initialState: IInitialState = {
   isLoading: false,
-  user: null,
   token: null,
-  isAuthenticated: false,
+  user: JSON.parse(localStorage.getItem("user") || "null"),
+  isAuthenticated: !!localStorage.getItem("user"),
   error: null as string | null,
 };
 
@@ -29,12 +40,15 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    //  if required
     logout: (state) => {
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
       state.isLoading = false;
       state.error = null;
+
+      localStorage.removeItem("user");
     },
   },
 

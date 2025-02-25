@@ -10,3 +10,17 @@ export interface IDataCard {
   Icon: React.ElementType;
   isCurrency?: boolean;
 }
+
+export interface IMenuItems {
+  id: number;
+  title: string;
+  link: string;
+}
+
+export interface IUser {
+  email: string;
+  firstName: string;
+  gender: string;
+  languagePreference: string;
+  lastName: string;
+}

@@ -5,7 +5,7 @@ import NavBar from "../components/navbar/navbar";
 const Home = () => {
   return (
     <div className="flex flex-row">
-      <div className="hidden fixed left-0 top-0 overflow-y-auto md:w-80 z-40 md:block">
+      <div className="hidden fixed left-0 top-0 overflow-y-auto md:w-80 z-40 md:block h-full">
         <SideBar />
       </div>
 

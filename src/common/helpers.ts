@@ -3,11 +3,10 @@ import { IUserCredentials } from "./types";
 
 export const signInUserAPI = async (userData: IUserCredentials) => {
   try {
-    const apiKey = "35a54c643ff0377c828250979c2e7313";
     const apiURL = "/benion-ml/api/auth/login";
 
     const Header = {
-      "x-api-key": apiKey,
+      "x-api-key": import.meta.env.VITE_API_KEY,
       "Content-Type": "application/json",
     };
 

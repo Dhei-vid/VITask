@@ -1,4 +1,4 @@
-import { IDataCard } from "./types";
+import { IDataCard, IMenuItems } from "./types";
 import {
   ShoppingCart,
   VolunteerActivism,
@@ -131,5 +131,23 @@ export const dataCard: IDataCard[] = [
     title: "New Plate Sales",
     value: 34943,
     Icon: BarChart,
+  },
+];
+
+export const menuItems: Array<IMenuItems> = [
+  {
+    id: 1,
+    title: "Home",
+    link: "/",
+  },
+  {
+    id: 2,
+    title: "Login",
+    link: "/login",
+  },
+  {
+    id: 3,
+    title: "Verification",
+    link: "/verification",
   },
 ];
