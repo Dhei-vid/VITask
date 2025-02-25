@@ -7,12 +7,12 @@ export const loginUser = createAsyncThunk(
   async (userCredentials: IUserCredentials, { rejectWithValue }) => {
     try {
       const response = await signInUserAPI(userCredentials);
-      return response.data.data;
+      const userData = response.data.data;
 
       // Save to localStorage
-      // localStorage.setItem("user", JSON.stringify(userData));
+      localStorage.setItem("user", JSON.stringify(userData));
 
-      // return userData;
+      return userData;
     } catch (error) {
       const errorMessage = (error as any).response?.data || "Login failed";
       return rejectWithValue(errorMessage);
