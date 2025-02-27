@@ -23,4 +23,16 @@ export interface IUser {
   gender: string;
   languagePreference: string;
   lastName: string;
+  role: string
+}
+
+export interface IVehiceManagement {
+  id: number;
+  title: string;
+  Icon: React.ElementType;
+  dropdown: Array<{
+    id: number;
+    title: string;
+    Icon: React.ElementType;
+  }>;
 }

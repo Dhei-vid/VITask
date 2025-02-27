@@ -1,13 +1,13 @@
 import MenuBar from "../components/navbar/menubar";
-import { goldColor } from "../common/constants";
 import CarsImg from "../assets/cars_img.png";
+
 const LandingPage = () => {
   return (
-    <div className={`bg-[${goldColor}]`}>
+    <div className={`bg-color mb-24`}>
       <MenuBar />
 
       <div
-        className={"relative flex flex-col items-center h-[15rem] md:h-[25rem]"}
+        className={"relative flex flex-col items-center h-[15rem] md:h-[27rem]"}
       >
         <p
           className={
@@ -17,8 +17,8 @@ const LandingPage = () => {
           anambra integrated vehicle adminstration system
         </p>
 
-        <div className={"absolute top-[53%] md:top-[28%] lg:top-0"}>
-          <img src={CarsImg} alt="" width={1050} height={700} />
+        <div className={"absolute top-[30%] md:top-[30%] lg:top-0"}>
+          <img src={CarsImg} alt="" width={1100} height={700} />
         </div>
       </div>
     </div>

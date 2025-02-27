@@ -16,13 +16,13 @@ const DataCard: FC<IDataCard> = ({ title, value, Icon, isCurrency }) => {
       }
     >
       <div className={"flex md:flex-row gap-3 items-center"}>
-        <div className={"border border-[#df9c19] rounded-full p-1"}>
+        <div className={"border border-color rounded-full p-1"}>
           <div
             className={
               "flex items-center justify-center rounded-full bg-gray-50 p-4 w-12 h-12"
             }
           >
-            <Icon sx={{ color: "#df9c19", fontSize: 20 }} />
+            <Icon className={"gold"} sx={{ fontSize: 20 }} />
           </div>
         </div>
         <div className={"flex flex-col w-full md:w-[12rem]"}>

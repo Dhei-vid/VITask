@@ -1,32 +1,40 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import IconBlue from "../../assets/eagle_logo_blue.png";
 import { plateNumber, vehiceManagement } from "../../common/data";
-import { ArrowDropDownRounded, ArrowForwardRounded } from "@mui/icons-material";
-import { goldColor } from "../../common/constants";
+import { SideBarItem, SubSideBarItem } from "./side-bar-item";
+import { CloseRounded } from "@mui/icons-material";
 
-const SideBar = () => {
-  const [openMainDropdown, setOpenMainDropdown] = useState<number | null>(null);
-  const [openSubDropdown, setOpenSubDropdown] = useState<number | null>(null);
+interface ISideBar {
+  onClick?: () => void;
+}
 
-  const handleMainDropdownToggle = (id: number) => {
-    setOpenMainDropdown((prev) => (prev === id ? null : id));
-    setOpenSubDropdown(null); // Close sub-dropdown when toggling main
+const SideBar: FC<ISideBar> = ({ onClick }) => {
+  const [openPlateNDW, setPlateNDW] = useState<number | null>(null);
+  const [openPlateNSubDW, setPlateNSubDW] = useState<number | null>(null);
+  const [openVehicleDW, setVehicleDropdown] = useState<number | null>(null);
+
+  const handlePlateDropdownToggle = (id: number) => {
+    setPlateNDW((prev) => (prev === id ? null : id));
+    setPlateNSubDW(null);
   };
 
-  const handleSubDropdownToggle = (id: number) => {
-    setOpenSubDropdown((prev) => (prev === id ? null : id));
+  const handlePlateSubDropdownToggle = (id: number) => {
+    setPlateNSubDW((prev) => (prev === id ? null : id));
+  };
+
+  const handleVehicleDropdownToggle = (id: number) => {
+    setVehicleDropdown((prev) => (prev === id ? null : id));
   };
 
   return (
-    <div className={"flex flex-col md:80 bg-white shadow-r-lg"}>
-      <div className={"flex items-center justify-center"}>
-        <img
-          src={IconBlue}
-          alt={"Logo"}
-          className={""}
-          width={150}
-          height={100}
-        />
+    <div className={"z-40 flex flex-col md:[30rem] bg-white shadow-r-lg"}>
+      <div
+        className={"flex items-center w-full justify-between md:justify-center"}
+      >
+        <img src={IconBlue} alt={"Logo"} width={150} height={100} />
+        <div onClick={onClick} className={"md:hidden block cursor-pointer"}>
+          <CloseRounded sx={{ fontSize: 40 }} />
+        </div>
       </div>
 
       <div>
@@ -35,76 +43,40 @@ const SideBar = () => {
         </div>
 
         <div className="p-4">
-          {plateNumber.map(({ id, title, Icon, requests }) => (
+          {plateNumber.map(({ id, title, Icon, dropdown }) => (
             <div key={id} className="cursor-pointer">
-              <div
-                className="flex flex-row gap-2 items-center group"
-                onClick={() => handleMainDropdownToggle(id)}
-              >
-                <Icon
-                  sx={{ fontSize: 20 }}
-                  className={`${
-                    openMainDropdown === id ? `text-[${goldColor}]` : ""
-                  } group-hover:text-[${goldColor}]`}
-                />
-                <p
-                  className={`${
-                    openMainDropdown === id ? `text-[${goldColor}]` : ""
-                  } group-hover:text-[${goldColor}] font-semibold text-sm`}
-                >
-                  {title}
-                </p>
-                {requests && (
-                  <ArrowDropDownRounded
-                    sx={{ fontSize: 20 }}
-                    className={`group-hover:text-[${goldColor}] transition-transform ${
-                      openMainDropdown === id
-                        ? `rotate-180 text-[${goldColor}]`
-                        : "rotate-0"
-                    }`}
-                  />
-                )}
-              </div>
+              <SideBarItem
+                title={title}
+                Icon={Icon}
+                handleClick={() => handlePlateDropdownToggle(id)}
+                id={id}
+                selectedId={openPlateNDW}
+              />
 
               {/* First Level Dropdown */}
-              {requests && openMainDropdown === id && (
-                <div className="pl-12 mt-2">
-                  <div
-                    className="flex items-center gap-2 cursor-pointer"
-                    onClick={() => handleSubDropdownToggle(requests.id)}
-                  >
-                    <p className="text-sm text-gray-700 hover:text-[${goldColor}]">
-                      {requests.title}
-                    </p>
-                    <ArrowDropDownRounded
-                      sx={{ fontSize: 20 }}
-                      className={`transition-transform ${
-                        openSubDropdown === requests.id
-                          ? "rotate-180"
-                          : "rotate-0"
-                      }`}
-                    />
-                  </div>
+              {openPlateNDW === id && dropdown && (
+                <div className="flex flex-col gap-4 pl-8 py-4 mt-2">
+                  {dropdown.map(({ id, title, Icon, dropdown }) => (
+                    <div>
+                      <SideBarItem
+                        id={id}
+                        title={title}
+                        Icon={Icon}
+                        handleClick={() => handlePlateSubDropdownToggle(id)}
+                        selectedId={openPlateNSubDW}
+                        textStyle={"text-sm font-light"}
+                      />
 
-                  {/* Second Level Dropdown */}
-                  {openSubDropdown === requests.id && (
-                    <div className="pl-6 mt-2">
-                      {requests.dropdown.map((item) => (
-                        <div
-                          key={item.id}
-                          className={`flex flex-row items-center gap-2 py-1 text-sm text-gray-600 hover:text-[${goldColor}]`}
-                        >
-                          <ArrowForwardRounded
-                            sx={{ fontSize: 15 }}
-                            className={`text-xs text-[${goldColor}]`}
-                          />
-                          <p className={`text-xs text-[${goldColor}]`}>
-                            {item.title}
-                          </p>
+                      {/* Second Level Dropdown */}
+                      {openPlateNSubDW === id && dropdown && (
+                        <div className="flex flex-col gap-2 pl-6 mt-2">
+                          {dropdown.map((item) => (
+                            <SubSideBarItem title={item.title} />
+                          ))}
                         </div>
-                      ))}
+                      )}
                     </div>
-                  )}
+                  ))}
                 </div>
               )}
             </div>
@@ -120,24 +92,25 @@ const SideBar = () => {
         </div>
 
         <div className={"flex flex-col gap-5 p-4"}>
-          {vehiceManagement.map(({ id, title, Icon }) => {
+          {vehiceManagement.map(({ id, title, Icon, dropdown }) => {
             return (
               <div key={id} className={"cursor-pointer"}>
-                <div className={"flex flex-row gap-2 items-center group"}>
-                  <Icon
-                    sx={{ fontSize: 20 }}
-                    className={`group-hover:text-[${goldColor}]`}
-                  />
-                  <p
-                    className={`group-hover:text-[${goldColor}] font-semibold text-sm`}
-                  >
-                    {title}
-                  </p>
-                  <ArrowDropDownRounded
-                    sx={{ fontSize: 20 }}
-                    className={`group-hover:text-[${goldColor}]`}
-                  />
-                </div>
+                <SideBarItem
+                  id={id}
+                  title={title}
+                  Icon={Icon}
+                  handleClick={() => handleVehicleDropdownToggle(id)}
+                  selectedId={openVehicleDW}
+                />
+
+                {openVehicleDW === id &&
+                  dropdown.map(({ id, title }) => {
+                    return (
+                      <div className="flex flex-col gap-2 pl-8 mt-2">
+                        <SubSideBarItem key={id} title={title} />
+                      </div>
+                    );
+                  })}
               </div>
             );
           })}

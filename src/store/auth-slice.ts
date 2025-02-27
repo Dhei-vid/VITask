@@ -40,7 +40,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    //  if required
     logout: (state) => {
       state.user = null;
       state.token = null;

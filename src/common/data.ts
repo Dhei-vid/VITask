@@ -10,7 +10,6 @@ import {
   FolderCopyRounded,
   ListRounded,
   RememberMeRounded,
-  ArrowForwardRounded,
 } from "@mui/icons-material";
 
 export const plateNumber = [
@@ -18,31 +17,45 @@ export const plateNumber = [
     id: 1,
     title: "Dashboard",
     Icon: House,
-    requests: {
-      id: 1,
-      title: "Plate Number Requests",
-      Icon: FolderCopyRounded,
-      dropdown: [
-        {
-          id: 1,
-          title: "Requests",
-          Icon: ArrowForwardRounded,
-        },
-        {
-          id: 2,
-          title: "Assigned Plate Numbers",
-          Icon: ArrowForwardRounded,
-        },
-      ],
-    },
-    sales: {
-      id: 2,
-      title: "Sales",
-    },
-    reports: {
-      id: 3,
-      title: "Reports",
-    },
+    dropdown: [
+      {
+        id: 1,
+        title: "Plate Number Requests",
+        Icon: FolderCopyRounded,
+        dropdown: [
+          {
+            id: 1,
+            title: "Requests",
+          },
+          {
+            id: 2,
+            title: "Assigned Plate Numbers",
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "Sales",
+        Icon: FolderCopyRounded,
+        dropdown: [
+          {
+            id: 1,
+            title: "Sales Sub",
+          },
+        ],
+      },
+      {
+        id: 3,
+        title: "Reports",
+        Icon: ListRounded,
+        dropdown: [
+          {
+            id: 1,
+            title: "Reports Sub",
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -51,51 +64,121 @@ export const vehiceManagement = [
     id: 1,
     title: "Vehicles",
     Icon: DirectionsCarRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Vehicles Sub",
+        Icon: DirectionsCarRounded,
+      },
+    ],
   },
   {
     id: 2,
     title: "Tax Payer",
     Icon: PersonRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Tax Payer Sub",
+        Icon: PersonRounded,
+      },
+    ],
   },
   {
     id: 3,
     title: "Renewal",
     Icon: FolderCopyRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Renewal Sub",
+        Icon: FolderCopyRounded,
+      },
+    ],
   },
   {
     id: 4,
     title: "Reports",
     Icon: ListRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Reports Sub",
+        Icon: ListRounded,
+      },
+    ],
   },
   {
     id: 5,
     title: "Change Request",
     Icon: FolderCopyRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Change Request Sub",
+        Icon: FolderCopyRounded,
+      },
+    ],
   },
   {
     id: 6,
     title: "Insurance",
     Icon: FolderCopyRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Insurance Sub",
+        Icon: FolderCopyRounded,
+      },
+    ],
   },
   {
     id: 7,
     title: "Proof of Ownership",
     Icon: FolderCopyRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Proof of Ownership Sub",
+        Icon: FolderCopyRounded,
+      },
+    ],
   },
   {
     id: 8,
     title: "Collections",
     Icon: FolderCopyRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Collections Sub",
+        Icon: FolderCopyRounded,
+      },
+    ],
   },
   {
     id: 9,
     title: "Legacy Assessments",
     Icon: RememberMeRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Legacy Assessments Sub",
+        Icon: RememberMeRounded,
+      },
+    ],
   },
   {
     id: 10,
     title: "Change of Ownership",
     Icon: RememberMeRounded,
+    dropdown: [
+      {
+        id: 1,
+        title: "Change of Ownership Sub",
+        Icon: RememberMeRounded,
+      },
+    ],
   },
 ];
 
@@ -147,6 +230,11 @@ export const menuItems: Array<IMenuItems> = [
   },
   {
     id: 3,
+    title: "Dashboard",
+    link: "/dashboard",
+  },
+  {
+    id: 4,
     title: "Verification",
     link: "/verification",
   },

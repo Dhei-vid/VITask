@@ -19,9 +19,7 @@ const InfoCard: FC<IInfoCard> = ({ fname, lname }) => {
 
   return (
     <div
-      className={
-        "flex flex-col justify-center gap-3 bg-linear-65 from-[#53ba4a] to-primary rounded-lg w-full md:w-96 py-3 px-8"
-      }
+      className={`flex flex-col justify-center gap-3 gradient rounded-lg w-full md:w-96 py-3 px-8`}
     >
       <div>
         <p className={"text-white text-lg font-semibold"}>

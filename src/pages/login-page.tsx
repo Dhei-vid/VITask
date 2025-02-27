@@ -1,5 +1,4 @@
 import Login from "../components/auth/log-in";
-import { goldColor } from "../common/constants";
 import MenuBar from "../components/navbar/menubar";
 import GovIcon from "../assets/main_logo.png";
 import PlateNumber from "../assets/car_plate.jpeg";
@@ -8,7 +7,7 @@ import logoBlue from "../assets/eagle_logo_blue.png";
 
 const LoginPage = () => {
   return (
-    <div className={`h-full overflow-hidden`}>
+    <div className={`h-full overflow-hidden mb-12`}>
       <MenuBar />
 
       <div
@@ -16,7 +15,7 @@ const LoginPage = () => {
           "min-h-auto grid grid-cols-none md:grid-cols-[60%_40%] grid-rows-auto"
         }
       >
-        <div className={`h-[28rem] hidden md:block relative bg-[${goldColor}]`}>
+        <div className={`h-[28rem] hidden md:block relative bg-color`}>
           <div className="flex flex-col gap-8 items-center py-10">
             <img src={GovIcon} alt="gov Icon" width={100} height={100} />
             <img src={PlateNumber} alt="plate image" width={300} height={200} />

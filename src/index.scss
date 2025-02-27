@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@use "tailwindcss" as *;
+
+$gold-color: #df9c19;
+$green-color: #53ba4a;
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -12,4 +15,61 @@
 body {
   margin: 0;
   padding: 0;
+}
+
+.gold-text {
+  color: inherit;
+
+  &:hover,
+  &:focus {
+    color: #{$gold-color};
+  }
+}
+
+.green-text {
+  color: inherit;
+
+  &:hover,
+  &:active {
+    color: #{$green-color};
+  }
+}
+
+.bg-color {
+  background-color: #{$gold-color};
+}
+
+@mixin gradient-bg($start, $end) {
+  background: linear-gradient(135deg, $start, $end);
+}
+
+.gradient {
+  @include gradient-bg($green-color, $gold-color);
+}
+
+.border-color {
+  border-color: #{$gold-color};
+}
+
+.gold {
+  color: #{$gold-color};
+}
+
+.group {
+  // display: inline-block;
+
+  &:hover {
+    .group-hover {
+      color: #{$gold-color};
+    }
+  }
+}
+
+.no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
 }

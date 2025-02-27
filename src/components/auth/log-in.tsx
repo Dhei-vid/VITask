@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/auth-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { goldColor } from "../../common/constants";
 import InputField from "./input";
 
 const Login = () => {
@@ -27,7 +26,7 @@ const Login = () => {
         setIdentifier("");
         setPassword("");
 
-        navigate("/home");
+        navigate("/dashboard");
       }
     });
   };
@@ -70,7 +69,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className={`my-1 cursor-pointer p-2 text-white font-semibold rounded-lg bg-[${goldColor}] hover:bg-[${goldColor}]/20`}
+          className={`my-1 cursor-pointer p-2 text-white font-semibold rounded-lg bg-color`}
         >
           {isLoading ? "Loading..." : "Sign In"}
         </button>
